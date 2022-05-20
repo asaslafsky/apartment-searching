@@ -52,5 +52,5 @@ def runMadisonScraper(fileName):
 
 
 if __name__ == "__main__":
-    fileName = 'infoMadison.csv'
+    fileName = 'csvs/infoMadison.csv'
     runMadisonScraper(fileName)

@@ -31,17 +31,21 @@ def getText(jshandle, selector):
     return str(jshandle.query_selector(selector).get_property('innerText')).replace(',', '')
 
 
+def containsNumber(string):
+    return bool(re.search(r'\d', string))
+
+
 def grabAptsInfo(frame, aptsInfo, currentDateTime, moveInDate):
     # For Every Floorplan Shown On This Calendar Day
     for floorplan in frame.query_selector_all(".floorplan-tile"):
-        # If There Isn't A Number In The String, No Apartments With This Floorplan Are Available
+        # No Number In The String = No Apartments With This Floorplan Are Available
         # So Go To The Next Floorplan
-        isntAvailable = re.search('\d', getText(floorplan, '.primary')) is None
-        if isntAvailable:
+        isAvailable = containsNumber(getText(floorplan, '.primary'))
+        if not isAvailable:
             continue
 
         floorplanName = getText(floorplan, ".name")
-        bedBathSquareFootage = [int(word) for word in getText(floorplan, ".specs").split() if word.isdigit()]
+        bedBathSquareFootage = [float(word) for word in getText(floorplan, ".specs").split() if containsNumber(word)]
         
         rentRange = re.sub("[^0-9\-]", "",getText(floorplan, '.range')).split('-')
         if len(rentRange) == 1:
@@ -133,11 +137,12 @@ def runPlaywright(url, fileName):
 
 if __name__ == '__main__':
     url, fileName = sys.argv[1:3]
-    # calibreUrl = "https://87022266.onlineleasing.realpage.com"
-    # calibreFileName = "infoCalibre.csv"
+    
+    # url = "https://87022266.onlineleasing.realpage.com"
+    # fileName = "csvs/infoCalibre.csv"
 
-    # legacyURL = "https://4548768.onlineleasing.realpage.com"
-    # legacyFileName = "infoLegacy.csv"
+    # url = "https://4548768.onlineleasing.realpage.com"
+    # fileName = "csvs/infoLegacy.csv"
 
     runPlaywright(url, fileName)
     
