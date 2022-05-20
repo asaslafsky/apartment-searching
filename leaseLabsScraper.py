@@ -1,4 +1,4 @@
-from os import lseek
+import sys
 from playwright.sync_api import sync_playwright
 import time
 import re
@@ -56,7 +56,7 @@ def saveInfo(aptInfo, fileName):
     openMode = 'a' if exists(fileName) else 'w'
     with open(fileName, openMode) as openFile:
         fileWriter = csv.writer(openFile)
-        columnNames = ['scraping_date', 'scraping_time', 'floorplan_name', 'bedroom', 'bathroom', 'apartment_number', 'rent_min', 'rent_max', 'move_in_month', 'move_in_day', 'move_in_year']
+        columnNames = ['scraping_date', 'scraping_time', 'floorplan_name', 'bedroom', 'bathroom', 'squareFootage', 'rent_min', 'rent_max', 'move_in_month', 'move_in_day', 'move_in_year']
         if openMode == 'w':
             fileWriter.writerow(columnNames)
         fileWriter.writerows(aptInfo)
@@ -68,7 +68,7 @@ def run(playwright, url, fileName):
 
     try:
         # Get Frame Info
-        browser = playwright.firefox.launch(headless=False)
+        browser = playwright.firefox.launch() #headless=False
         page = browser.new_page()
         page.goto(url)
         frame = page.wait_for_selector("#rp-leasing-widget").content_frame()
@@ -89,14 +89,19 @@ def run(playwright, url, fileName):
             # Close The Calendar
             clickOnCalendar(frame)
             
+            # Grab The Indices Of All The Days That Are In The Current Month
             availableDaysForCurrentMonth = []
             for i, calendarDay in enumerate(calendarMonth):
                 if isClickable(calendarDay) and isInCurrentMonth(calendarDay):
                     availableDaysForCurrentMonth.append(i)
             
+            # If There Are 0 Days We Can Access In The Current Month,
+            # Then There Is No More New Information And We Should Save The Data
             if len(availableDaysForCurrentMonth) == 0:
                 thereIsMoreInfo = False
 
+            # Loop Through All The Days That In The Current Month
+            # And Grab The Apartment Information On Each Day
             isFirstDayOfMonth = True
             for daysIndex in availableDaysForCurrentMonth:
                 clickOnCalendar(frame)
@@ -107,6 +112,7 @@ def run(playwright, url, fileName):
                 grabAllDaysForMonth(frame)[daysIndex].click()
                 moveInDate = str(frame.query_selector("#calendarInput").get_property('value')).replace(',', '').split(' ')
                 moveInDate[0] = datetime.strptime(moveInDate[0], "%B").month
+                print(moveInDate[:3])
                 aptsInfo = grabAptsInfo(frame, aptsInfo, currentDateTime, moveInDate[:3])
                 
             
@@ -126,11 +132,12 @@ def runPlaywright(url, fileName):
         run(playwright, url, fileName)
 
 if __name__ == '__main__':
-    calibreUrl = "https://87022266.onlineleasing.realpage.com"
-    calibreFileName = "infoCalibre.csv"
+    url, fileName = sys.argv[1:3]
+    # calibreUrl = "https://87022266.onlineleasing.realpage.com"
+    # calibreFileName = "infoCalibre.csv"
 
-    legacyURL = "https://4548768.onlineleasing.realpage.com"
-    legacyFileName = "infoLegacy.csv"
+    # legacyURL = "https://4548768.onlineleasing.realpage.com"
+    # legacyFileName = "infoLegacy.csv"
 
-    runPlaywright(calibreUrl, calibreFileName)
+    runPlaywright(url, fileName)
     
