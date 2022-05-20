@@ -1,0 +1,10 @@
+name: Run Apartments Website Scraping Every Hour
+on:
+  schedule:
+    # Run every hour
+    - cron: '* * * * *'
+jobs:
+  name: Scrape Websites
+  runs-on: ubuntu-latest
+  run: ../../runScrapers.sh
+  shell: bash
