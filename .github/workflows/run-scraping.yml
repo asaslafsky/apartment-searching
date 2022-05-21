@@ -7,9 +7,9 @@ jobs:
   calibre-scraping:
     runs-on: ubuntu-latest
     steps:
-      - name: Scrape Calibre Website For Apartments
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
       - run: python ./leaseLabsScraper.py https://87022266.onlineleasing.realpage.com csvs/infoCalibre.csv
 #   legacy-scraping:
 #   madison-scraping:
+#       - name: Scrape Calibre Website For Apartments
