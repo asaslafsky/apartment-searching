@@ -1,8 +1,10 @@
 name: Run Apartments Website Scraping Every Hour
 on:
-  schedule:
+  workflow_dispatch:
+#   schedule:
     # Run every hour
-    - cron: "5 * * * *"
+#     - cron: "*/5 * * * *"
+    
 jobs:
   calibre-scraping:
     runs-on: ubuntu-latest
