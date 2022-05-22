@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     # Run every hour
-    - cron: "*/5 * * * *"
+    - cron: "0 * * * *"
 
 jobs:
   calibre-scraping:
