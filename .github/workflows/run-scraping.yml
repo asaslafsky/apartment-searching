@@ -14,35 +14,10 @@ jobs:
       - run: pip install -r requirements.txt
       - run: playwright install firefox
       - run: python ./leaseLabsScraper.py https://87022266.onlineleasing.realpage.com csvs/infoCalibre.csv
-      - uses: EndBug/add-and-commit@v9
-        with:
-          add: 'csvs'
-          message: "Commit from GitHub Actions Updating Csv's"
-          push: '--force'
-  legacy-scraping:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
-      - run: pip install -r requirements.txt
-      - run: playwright install firefox
       - run: python ./leaseLabsScraper.py https://4548768.onlineleasing.realpage.com csvs/infoLegacy.csv
+      - run: python ./madisonDruidHillsScraper.py
       - uses: EndBug/add-and-commit@v9
         with:
           add: 'csvs'
           message: "Commit from GitHub Actions Updating Csv's"
-          push: '--force'
-  madison-scraping:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
-      - run: pip install -r requirements.txt
-      - run: playwright install firefox
-      - run: python ./leaseLabsScraper.py https://4548768.onlineleasing.realpage.com csvs/infoLegacy.csv
-      - uses: EndBug/add-and-commit@v9
-        with:
-          add: 'csvs'
-          message: "Commit from GitHub Actions Updating Csv's"
-          push: '--force'
-
+#           push: '--force'
