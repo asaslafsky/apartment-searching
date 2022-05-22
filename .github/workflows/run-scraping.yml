@@ -17,9 +17,8 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         with:
           add: 'csvs'
-          commit: --signoff
           message: "Commit from GitHub Actions Updating Csv's"
-          push: True
+          tag_push: '--force'
   legacy-scraping:
     runs-on: ubuntu-latest
     steps:
@@ -31,9 +30,8 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         with:
           add: 'csvs'
-          commit: --signoff
           message: "Commit from GitHub Actions Updating Csv's"
-          push: True
+          tag_push: '--force'
   madison-scraping:
     runs-on: ubuntu-latest
     steps:
@@ -45,7 +43,6 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         with:
           add: 'csvs'
-          commit: --signoff
           message: "Commit from GitHub Actions Updating Csv's"
-          push: True
+          tag_push: '--force'
 
