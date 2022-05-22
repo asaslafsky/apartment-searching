@@ -1,10 +1,10 @@
 name: Run Apartments Website Scraping Every Hour
 on:
   workflow_dispatch:
-#   schedule:
+  schedule:
     # Run every hour
-#     - cron: "*/5 * * * *"
-    
+    - cron: "*/5 * * * *"
+
 jobs:
   calibre-scraping:
     runs-on: ubuntu-latest
@@ -20,7 +20,32 @@ jobs:
           commit: --signoff
           message: "Commit from GitHub Actions Updating Csv's"
           push: True
-#   legacy-scraping:
-#   madison-scraping:
-#       - name: Scrape Calibre Website For Apartments
+  legacy-scraping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python ./leaseLabsScraper.py https://4548768.onlineleasing.realpage.com csvs/infoLegacy.csv
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: 'csvs'
+          commit: --signoff
+          message: "Commit from GitHub Actions Updating Csv's"
+          push: True
+  madison-scraping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python ./leaseLabsScraper.py https://4548768.onlineleasing.realpage.com csvs/infoLegacy.csv
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: 'csvs'
+          commit: --signoff
+          message: "Commit from GitHub Actions Updating Csv's"
+          push: True
 
