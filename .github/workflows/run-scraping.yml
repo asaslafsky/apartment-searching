@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
       - run: pip install -r requirements.txt
-      - run: playwright install
+      - run: playwright install firefox
       - run: python ./leaseLabsScraper.py https://87022266.onlineleasing.realpage.com csvs/infoCalibre.csv
       - uses: EndBug/add-and-commit@v9
         with:
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
       - run: pip install -r requirements.txt
-      - run: playwright install
+      - run: playwright install firefox
       - run: python ./leaseLabsScraper.py https://4548768.onlineleasing.realpage.com csvs/infoLegacy.csv
       - uses: EndBug/add-and-commit@v9
         with:
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
       - run: pip install -r requirements.txt
-      - run: playwright install
+      - run: playwright install firefox
       - run: python ./leaseLabsScraper.py https://4548768.onlineleasing.realpage.com csvs/infoLegacy.csv
       - uses: EndBug/add-and-commit@v9
         with:
