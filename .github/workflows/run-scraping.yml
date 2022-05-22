@@ -18,7 +18,7 @@ jobs:
         with:
           add: 'csvs'
           message: "Commit from GitHub Actions Updating Csv's"
-          tag_push: '--force'
+          push: '--force'
   legacy-scraping:
     runs-on: ubuntu-latest
     steps:
@@ -31,7 +31,7 @@ jobs:
         with:
           add: 'csvs'
           message: "Commit from GitHub Actions Updating Csv's"
-          tag_push: '--force'
+          push: '--force'
   madison-scraping:
     runs-on: ubuntu-latest
     steps:
@@ -44,5 +44,5 @@ jobs:
         with:
           add: 'csvs'
           message: "Commit from GitHub Actions Updating Csv's"
-          tag_push: '--force'
+          push: '--force'
 
