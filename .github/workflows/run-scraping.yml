@@ -14,6 +14,13 @@ jobs:
       - run: pip install -r requirements.txt
       - run: playwright install
       - run: python ./leaseLabsScraper.py https://87022266.onlineleasing.realpage.com csvs/infoCalibre.csv
+      - uses: EndBug/add-and-commit@v9
+      - with:
+          add: 'csvs'
+          commit: --signoff
+          message: "Commit from GitHub Actions Updating Csv's"
+          push: True
 #   legacy-scraping:
 #   madison-scraping:
 #       - name: Scrape Calibre Website For Apartments
+
