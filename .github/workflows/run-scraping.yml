@@ -6,7 +6,7 @@ on:
     - cron: "0 * * * *"
 
 jobs:
-  calibre-scraping:
+  apt-scraping:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
