@@ -68,7 +68,7 @@ def saveInfo(aptInfo, fileName):
 
 def run(playwright, url, fileName):
     aptsInfo = []
-    currentDateTime = [datetime.now().strftime("%Y/%m/%d"), datetime.now().strftime("%H")]
+    currentDateTime = [datetime.now().strftime("%Y-%m-%d"), datetime.now().strftime("%H")]
 
     try:
         # Get Frame Info

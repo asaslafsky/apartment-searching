@@ -23,7 +23,7 @@ def saveInfo(aptInfo, fileName):
         fileWriter.writerows(aptInfo)
 
 def runMadisonScraper(fileName):
-    currentDate = datetime.now().strftime("%Y/%m/%d")
+    currentDate = datetime.now().strftime("%Y-%m-%d")
     currentTime = datetime.now().strftime("%H")
 
     url = "https://www.madisondruidhills.com/floorplans/availableunits?handler=Filter"
